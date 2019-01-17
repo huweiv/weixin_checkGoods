@@ -1,0 +1,4 @@
+jdbcUrl = jdbc:mysql://localhost/sw_weixin_check_project_2018_01?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password =root
+devMode = true

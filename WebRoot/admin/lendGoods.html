@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>借出物品</title>
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page-header"> 
+<h1 >&nbsp;&nbsp;&nbsp;&nbsp;借&nbsp;出&nbsp;物&nbsp;品&nbsp;&nbsp;</h1>
+</div>
+<div style="float:left">
+<a href="/admin" style="text-decoration:none;"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页</h4></a>
+</div>
+<br><br><br>
+
+<div style="float:left;width:20%">
+<br><br>
+</div>
+
+<div  style="float:left;width:70%" >
+<table class="table table-bordered table-hover" data-width="80%">
+
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>物品名称</th>
+       <th>取货人姓名</th>
+       <th>取货人学号</th>
+       <th>取货时间</th>
+       <th>是否为消耗品</th>
+    </tr> 
+  </thead>
+  <tbody>	
+#for(i = (pageNum-1) * 12; i < ((pageNum * 12) < (goods.size()) ? (pageNum * 12) : (goods.size())); i++)
+
+   <tr>
+    <td>#(goods.get(i).orders)</td>
+      <td>#(goods.get(i).goodsname)</td>
+      <td>#(goods.get(i).stunames)</td>
+      <td>#(goods.get(i).stuIds)</td>
+      <td>#(goods.get(i).loantimes.toString().substring(0, 16))</td>
+      #if(goods.get(i).consumables == 1)
+      <td>#("是")</td>
+      #else
+      <td>#("否")</td>
+      #end
+    </tr>
+    #end
+  
+</table>
+#set(x1 = (pageNum - 1 > 0 ? pageNum-1 : 1))
+<a href="/admin/changeLendPage/#(x1)"> 上一页</a>&nbsp;&nbsp; 第&nbsp;&nbsp;#(pageNum)&nbsp;&nbsp;页  &nbsp;&nbsp;
+#set(x2 = ((pageNum + 1) > ((goods.size() - 1) / 12) + 1) ? pageNum : pageNum+1)
+<a href="/admin/changeLendPage/#(x2)">下一页</a>
+</div>
+
+
+</body>
+</html>

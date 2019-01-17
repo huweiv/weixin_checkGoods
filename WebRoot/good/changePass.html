@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="#(BASE_PATH)/static/css/manage.css">
+<title>修改密码</title>
+<script type="text/javascript" src="#(BASE_PATH)/js/jquery-1.9.1.min.js"></script>
+ <script type="text/javascript">
+$(document).ready(function(){
+  $("#submit").click(function(){
+	  var arr = $("#username").val();
+	  var err = $("#password1").val();	
+	  if (arr == "" || err == "") {
+			$("#error").text("账号或密码不能为空！");
+			getPic();
+		}
+		else {
+			$.ajax({
+				type: "POST",
+				url: "/good/doChangePass",
+				data: {username: $("#username").val(), password1: $("#password1").val(), yzm: $("#yzm").val(), password2: $("#password2").val()},
+				dataType: "json",
+				success: function(data) {
+					if (data.state == "1") {
+						$("#error").text("验证码错误");
+						getPic();
+					} 
+					else {
+						if (data.state == "2") {
+							$("#error").text("当前账号不存在！");
+							getPic();
+						}
+						else {
+							if (data.state == "3") {
+								$("#error").text("两次密码不一致！");
+								getPic();
+							}
+							else{
+								alert("修改成功！");
+								window.location.href = "/good/login";
+							}	
+						}
+					}
+				}
+			});
+		}
+  });
+});
+</script>
+<script>
+function getPic() {
+	$("#codePic").attr("src","/yzm?flag="+Math.random()); 
+}
+</script>
+<script>
+function _keydown() {
+	if (event.keyCode == 13) {  //回车
+		$("#submit").click();
+		return false;
+	}
+}
+</script>
+</head>
+<body style="text-align:center">
+<br><br><br>
+<h1 style="color:#ffffff"> 修&nbsp;改&nbsp;密&nbsp;码</h1>
+<div style="text-align:center">
+<br><br>
+<lable class="control-label" for="username"  style="color:#ffffff">用户账号：</lable>
+			<input type="text" placeholder="请输入用户账号" id="username" name="username" value="#(username)">
+			
+			<br><br>
+	         <lable class="control-label" for="password"  style="color:#ffffff">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</lable>
+			<input type="password" placeholder="请输入密码" id ="password1" name="password1"> 
+			
+			<br><br>
+			 <lable class="control-label" for="password"  style="color:#ffffff">确认密码：</lable>
+			<input type="password" placeholder="请输入密码" id ="password2" name="password2"> 
+			
+			<br><br>
+	   <lable class="control-label" for="yzm" style="color:#ffffff">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
+			    <input type="text" placeholder="请输入验证码" id="yzm" name="yzm"  name="yzm"> <br>
+				<a><img alt="验证码" id="codePic" src="/yzm" onclick="getPic()"></a>   
+			<br><br>
+           <div id="J_Message" style="display: block;" class="error">
+							<i class="iconfont"></i>	 
+						<p id="error" style="color:red;"></p>
+		   </div>
+		<button id="submit" name="submit" type="button">确认</button>
+	</div>
+</body>
+</html>

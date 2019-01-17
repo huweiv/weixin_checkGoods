@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+<title>登录</title>
+<script type="text/javascript" src="#(BASE_PATH)/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#submit").click(function(){
+	  var arr = $("#username").val();
+	  if (arr == "") {
+			$("#error").text("学号不能为空！");
+		}
+		else {
+			$.ajax({
+				type: "POST",
+				url: "/index/dologin",
+				data: {username: $("#username").val()},
+				dataType: "json",
+				success: function(data) {
+					// 学号不存在
+					if (data.state == "false") {
+						$("#error").text("当前学号不存在！");
+					}
+					// 存在该学号，跳转
+					else {
+						window.location.href = "/admin";
+					}
+				}
+			});
+		}
+  });
+});
+</script>
+<script>
+function _keydown() {
+	if (event.keyCode == 13) {
+		$("#submit").click();
+		return false;
+	}
+}
+</script>
+</head>
+<body style="text-align:center">
+<br><br><br>
+<h1 style="color:#ffffff"> 登&nbsp;&nbsp;录</h1>
+<div style="text-align:center">
+<br><br>
+		<!--  <form  action="/index/dologin" method="post">-->
+			<lable class="control-label" for="username"  style="color:#ffffff">用户学号：</lable>
+			<input id="username" name="username" type="text" ; position:absolute; z-index:100;" value="#(username)" type="text" placeholder="请输入学号">						
+			
+			<!--  <br><br>
+	        <lable class="control-label" for="pwd"  style="color:#ffffff">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</lable>
+			<input type="password" placeholder="请输入密码" id ="pwd" name="password"> 
+			
+			<br><br>
+		 <lable class="control-label" for="yzm" style="color:#ffffff">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
+			<input type="text" placeholder="请输入验证码" id="yzm" name="yzm"  name="yzm"> <br>
+				<a href=""><img alt="验证码" src="/yzm" alt="点击更换" title="点击更换"></a>  
+			
+			<br><br>
+
+		<input id="submit" name="submit" type="submit"  class="btn" value="登录">-->
+		<!--  </form>-->
+	<div id="J_Message" style="display: block;" class="login-msg error">
+							<i class="iconfont"></i>	 
+						<p id="error"></p>
+		     			</div>
+		     			<button id="submit" name="submit" type="button">登录</button>
+	</div>
+</body>
+</html>

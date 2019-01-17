@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>物品管理</title>
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" />
+ <style>
+            @font-face {
+                font-family: "lantingxihei";
+        src: url("https://static.shiyanlou.com/fonts/FZLTCXHJW.TTF");
+        }
+
+        /* modal 模态框*/
+        #invite-user .modal-body {
+        overflow: hidden;
+        }
+        #invite-user .modal-body .form-label {
+        margin-bottom: 16px;
+        font-size:14px;
+        }
+        #invite-user .modal-body .form-invite {
+        width: 80%;
+        padding: 6px 12px;
+        background-color: #eeeeee;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        float: left;
+        margin-right: 10px;
+        }
+        #invite-user .modal-body .msg-modal-style {
+        background-color: #7dd383;
+        margin-top: 10px;
+        padding: 6px 0;
+        text-align: center;
+        width: 100%;
+        }
+        #invite-user .modal-body .modal-flash {
+        position: absolute;
+        top: 53px;
+        right: 74px;
+        z-index: 999;
+        }
+        /* end modal */
+
+        .en-footer {
+        padding: 30px;
+        text-align: center;
+        font-size: 14px;
+        }
+        </style>
+</head>
+<body>
+<div class="page-header"> 
+<h1 >&nbsp;&nbsp;&nbsp;物&nbsp;品&nbsp;管&nbsp;理&nbsp;系&nbsp;统&nbsp;</h1>
+</div>
+
+<div style="float:right;margin-top:0px">
+<a href="/admin/destroySession"><button class="btn  btn-primary" >注销</button>&nbsp;&nbsp;&nbsp;</a>
+<br><br>
+</div>
+<br><br>
+
+<div style="float:left;width:20%">
+<br><br>
+</div>
+
+<div  style="float:left;width:70%" >
+<table>
+  <tr> 
+  <td style="font-size:18px;"> 管理：&nbsp;</td>
+  <td><a href="/admin/add" style="text-decoration:none;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >添加物品</button></a></td>
+  <td><a href="/admin/excelInto" style="text-decoration:none;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >导入物品</button></a></td>
+  <td><a href="/admin/excelOutto" data-toggle="doexport" style="text-decoration:none;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >导出物品</button></a></td>
+  <td><a href="/admin/Auditing" style="text-decoration:none;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >查看审核</button></a></td>
+  <td><a href="/admin/lendGoods" style="text-decoration:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >查看借出</button> </a></td>
+  <td><a href="/admin/hadGoods" style="text-decoration:none;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button class="btn  btn-primary" >查看剩余</button></a></td>
+  </tr>
+</table>
+<br>
+<table class="table table-bordered table-hover" data-width="80%">
+
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>物品名称</th>
+      <th>是否为消耗品</th>
+      <th>状态</th>
+      <th>购回时间</th>
+       <th>操作</th>
+    </tr> 
+  </thead>
+  <tbody>
+  	#for(x : page.getList())
+    <tr>
+      <td>#(x.orders)  </td>
+      <td>#(x.name)</td>
+      #if(x.consumables == 1)
+		<td>#("是")</td>
+		#else
+		<td>#("否")</td>
+		#end
+		#if(x.state == 1)
+      <td>#("已借出")</td>
+      #else
+		<td>#("在库存")</td>
+		#end
+      <td>#(x.stortime)</td>
+      <td >		
+		<a href="/admin/edit/#(x.id)"  >编辑</a>&nbsp;&nbsp;&nbsp;
+        <a href="/admin/delete/#(x.id)" >删除</a>  
+	  </td>
+    </tr>
+    #end
+  </tbody>
+   
+</table>
+ #@paginate(page.pageNumber, page.totalPage, "/admin/")
+
+
+</div>
+
+
+</body>
+</html>

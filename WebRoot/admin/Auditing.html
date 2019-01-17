@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>查看审核</title>
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page-header"> 
+<h1 >&nbsp;&nbsp;&nbsp;&nbsp;查&nbsp;看&nbsp;审&nbsp;核&nbsp;&nbsp;</h1>
+</div>
+</div>
+<div style="float:left">
+<a href="/admin" style="text-decoration:none;"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页</h4></a>
+</div>
+<br><br><br>
+
+<div style="float:left;width:20%">
+<br><br>
+</div>
+
+<div  style="float:left;width:70%" >
+<table class="table table-bordered table-hover" data-width="80%">
+
+  <thead>
+    <tr>
+    <th>编号</th>
+      <th>学号</th>
+      <th>姓名</th>
+      <th>操作</th>  
+    </tr> 
+  </thead>
+  <tbody>
+  	#for(x: user)
+    <tr data-id="#(for.index +1)">
+	  <td>#(for.index +1)</td>
+      <td>#(x.studId)</td>
+      <td>#(x.name)</td>
+      <td >		
+		<a href="/admin/AuditingThrough/#(x.id)"  >通过</a>&nbsp;&nbsp;&nbsp;
+        <a href="/admin/AuditingDelete/#(x.id)" >删除</a>  
+	  </td>
+    </tr>
+  </tbody>
+   #end
+</table>
+</div>
+
+
+</body>
+</html>

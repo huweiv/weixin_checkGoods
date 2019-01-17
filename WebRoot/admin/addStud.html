@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新增用户</title>
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="page-header"> 
+<h1 >&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增&nbsp;用&nbsp;户&nbsp;&nbsp;</h1>
+</div>
+<div style="text-align:center">
+ <form action="/admin/saveStud" method="post">
+
+<lable class="control-label" for="name"  >用户姓名：</lable>
+			<input type="text" placeholder="用户姓名" id ="name"  name="name"> 
+<br><br>
+
+<lable class="control-label" for="studId"  >用户学号：</lable>
+			<input type="text" placeholder="用户学号" id ="studId" name="studId"> 
+<br><br>			
+<lable class="control-label" for="passward"  >密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</lable>
+			<input type="text" placeholder="密码" id ="passward" name="passward"> 	
+
+<br><br>
+		<button class="btn btn-primary" id="submit" name="submit" type="button" >保存</button>
+		
+		<br>	
+</form> 
+</div>
+
+</body>
+</html>
